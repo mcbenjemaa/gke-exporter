@@ -11,9 +11,9 @@ type GKEMetadataFetcher interface {
 }
 
 type GKEClient struct {
-	Client      *container.Client
-	Zone        string
-	ProjectID   string
+	Client    *container.Client
+	Zone      string
+	ProjectID string
 }
 
 // NewGKEClient returns gke client

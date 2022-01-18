@@ -16,10 +16,9 @@ func IPRangeSize(ipRange string) uint64 {
 	return cidr.AddressCount(ipnet)
 }
 
-
 func AllocatableIps(ipRange string, count int) int {
-   
+
 	cidrCapacity := IPRangeSize(ipRange)
-   
-    return int(cidrCapacity)-count
+
+	return int(cidrCapacity) - count
 }

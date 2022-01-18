@@ -17,13 +17,13 @@ const (
 
 // KubernetesCollector represents GKE metadata
 type IpAllocationCollector struct {
-	gke gke.GKEMetadataFetcher
+	gke       gke.GKEMetadataFetcher
 	k8sClient *kubernetes.Clientset
 
 	AllocatableServiceIps *prometheus.Desc
-	AllocatablePodIps    *prometheus.Desc
-	ServiceIpAllocation *prometheus.Desc
-	PodsIpAllocation    *prometheus.Desc
+	AllocatablePodIps     *prometheus.Desc
+	ServiceIpAllocation   *prometheus.Desc
+	PodsIpAllocation      *prometheus.Desc
 }
 
 // NewKubernetesCollector creates a new MetadataCollector
@@ -34,7 +34,7 @@ func NewGKEIpAllocationCollector(gke gke.GKEMetadataFetcher, clientset *kubernet
 		"projectId",
 	}
 	return &IpAllocationCollector{
-		gke: gke,
+		gke:       gke,
 		k8sClient: clientset,
 
 		ServiceIpAllocation: prometheus.NewDesc(

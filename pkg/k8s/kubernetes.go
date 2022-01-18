@@ -15,10 +15,9 @@ import (
 	_ "k8s.io/client-go/plugin/pkg/client/auth/gcp"
 )
 
-
 func OutOfClusterClient() (*kubernetes.Clientset, error) {
 	var kubeconfig string = filepath.Join(homedir.HomeDir(), ".kube", "config")
-  
+
 	// use the current context in kubeconfig
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
 	if err != nil {
@@ -29,8 +28,6 @@ func OutOfClusterClient() (*kubernetes.Clientset, error) {
 	return kubernetes.NewForConfig(config)
 }
 
-
-
 func GetClient() (*kubernetes.Clientset, error) {
 	// creates the in-cluster config
 	config, err := rest.InClusterConfig()
@@ -38,17 +35,16 @@ func GetClient() (*kubernetes.Clientset, error) {
 		log.Fatalf("Unable to initialise InClusterConfig %v", err)
 	}
 	// creates the clientset
-   return kubernetes.NewForConfig(config)
+	return kubernetes.NewForConfig(config)
 }
 
-
 func CountServices(ctx context.Context, clientset *kubernetes.Clientset) (int, error) {
-  list, err := clientset.CoreV1().Services("").List(ctx, metav1.ListOptions{})
-  if err != nil {
-	  return 0, fmt.Errorf("unable to list services %w", err)
-  }
+	list, err := clientset.CoreV1().Services("").List(ctx, metav1.ListOptions{})
+	if err != nil {
+		return 0, fmt.Errorf("unable to list services %w", err)
+	}
 
-   return len(list.Items), nil
+	return len(list.Items), nil
 }
 
 func CountPods(ctx context.Context, clientset *kubernetes.Clientset) (int, error) {
@@ -56,6 +52,6 @@ func CountPods(ctx context.Context, clientset *kubernetes.Clientset) (int, error
 	if err != nil {
 		return 0, fmt.Errorf("unable to list pods %w", err)
 	}
-	
-	 return len(list.Items), nil
+
+	return len(list.Items), nil
 }

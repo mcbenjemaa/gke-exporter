@@ -43,7 +43,7 @@ func main() {
 	}
 
 	// get kubernetes client
-	clientset, err := k8s.GetClient() 
+	clientset, err := k8s.GetClient()
 	if err != nil {
 		log.Fatalf("unable to get k8s client %v", err)
 	}
@@ -54,9 +54,8 @@ func main() {
 		log.Fatalf("unable to create gke client %v", err)
 	}
 	gke := gke.GKEClient{Client: client,
-		Zone:        *zone,
+		Zone:      *zone,
 		ProjectID: *projectID}
-	
 
 	registry := prometheus.NewRegistry()
 
